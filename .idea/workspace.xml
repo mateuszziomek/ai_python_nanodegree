@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaaa0ebd-af47-4cff-87a9-a9a2d426b1d3" name="Default Changelist" comment="" />
+    <list default="true" id="aaaa0ebd-af47-4cff-87a9-a9a2d426b1d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,26 +24,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="5" />
-          <entry key="txt" value="1" />
+          <entry key="py" value="6" />
+          <entry key="txt" value="2" />
           <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="5" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="6" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1719" />
+          <entry key="py" value="2188" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1719" />
+          <entry key="Python" value="2188" />
         </counts>
       </usages-collector>
     </session>
@@ -51,8 +53,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="40" column="60" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
+            <state relative-caret-position="248">
+              <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="66" selection-end-column="42" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -69,11 +71,20 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>strip</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/classifier.py" />
         <option value="$PROJECT_DIR$/imagenet1000_clsid_to_human.txt" />
+        <option value="$PROJECT_DIR$/dognames.txt" />
         <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
@@ -82,6 +93,9 @@
     <option name="y" value="30" />
     <option name="width" value="1909" />
     <option name="height" value="1170" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -104,7 +118,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542905478456" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542957522302" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
@@ -166,10 +180,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1177" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18114798" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24242425" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -183,7 +197,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32903227" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.36129034" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.36050954" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -207,13 +221,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/IdeaIC2018.2/python_stubs/1031822246/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="4714" column="8" selection-start-line="4714" selection-start-column="8" selection-end-line="4714" selection-end-column="8" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/imagenet1000_clsid_to_human.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -239,10 +246,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dognames.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="208" column="13" lean-forward="true" selection-start-line="208" selection-start-column="13" selection-end-line="208" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/IdeaIC2018.2/python_stubs/1031822246/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="5052" column="8" selection-start-line="5052" selection-start-column="8" selection-end-line="5052" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="60" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
+        <state relative-caret-position="248">
+          <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="66" selection-end-column="42" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

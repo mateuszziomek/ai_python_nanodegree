@@ -30,13 +30,13 @@ def tag_files(image_dir):
     return results_dic
 
 
-def classify_images(images_directory, results_dic, model):
-    filenames = listdir(images_directory)
+def classify_images(images_dir, results_dic, model):
+    filenames = listdir(images_dir)
 
     for i, filename in enumerate(filenames):
         correct_label = results_dic[filename][0]
 
-        classifier_labels_string = classifier(images_directory + '/' + filename, model)
+        classifier_labels_string = classifier(images_dir + '/' + filename, model)
 
         if correct_label in classifier_labels_string.lower():
             is_match = 1
@@ -45,12 +45,35 @@ def classify_images(images_directory, results_dic, model):
 
         results_dic[filename] = [correct_label, classifier_labels_string, is_match]
 
-    print(results_dic)
-
     return results_dic
+
+
+def adjust_results4_isadog(results_dic, dogfile):
+    with open(dogfile, 'r') as file:
+        dog_names = [line.strip() for line in file]
+
+    for key, value in results_dic.items():
+        if value[0] in dog_names:
+            value.append(1)
+        else:
+            value.append(0)
+
+        is_classified_as_dog = 0
+        for classifier_label in value[1].split(','):
+            label = classifier_label.strip().lower()
+            if label in dog_names:
+                is_classified_as_dog = 1
+
+        value.append(is_classified_as_dog)
+
+        print(key + " " + str(value))
 
 
 if __name__ == '__main__':
     in_args = get_input_args()
 
-    classify_images(in_args.directory, tag_files(images_dir), in_args.arch)
+    results_dic = tag_files(images_dir)
+
+    classify_images(in_args.directory, results_dic, in_args.arch)
+
+    adjust_results4_isadog(results_dic, in_args.dogfile)
