@@ -69,6 +69,80 @@ def adjust_results4_isadog(results_dic, dogfile):
         print(key + " " + str(value))
 
 
+def calculates_results_stats(results_dic):
+    """
+    n_images - number of images
+#            n_dogs_img - number of dog images
+#            n_notdogs_img - number of NON-dog images
+#            n_match - number of matches between pet & classifier labels
+#            n_correct_dogs - number of correctly classified dog images
+#            n_correct_notdogs - number of correctly classified NON-dog images
+#            n_correct_breed - number of correctly classified dog breeds
+#            pct_match - percentage of correct matches
+#            pct_correct_dogs - percentage of correctly classified dogs
+#            pct_correct_breed - percentage of correctly classified dog breeds
+#            pct_correct_notdogs - percentage of correctly classified NON-dogs
+    """
+
+    # correct label, classifier_labels, is_match, is_dog_image, is_classified_as_dog
+
+    results_stats_dic = dict()
+
+    n_images = len(results_dic)
+    n_dogs_img = 0
+    n_notdogs_img = 0
+    n_match = 0
+    n_correct_dogs = 0
+    n_correct_notdogs = 0
+    n_correct_breed = 0
+
+    for value in results_dic.values():
+        # is dog image
+        if value[3] == 1:
+            n_dogs_img += 1
+        # is not dog image
+        else:
+            n_notdogs_img += 1
+
+        # number of matches
+        if value[2] == 1:
+            n_match += 1
+
+        # number of correctly classified dog images
+        if value[3] == 1 and value[4] == 1:
+            n_correct_dogs += 1
+        # number of correctly classified NON-dog images
+        elif value[3] == 0:
+            n_correct_notdogs += 1
+
+        # number of correctly classified dog breeds
+        if value[2] == 1 and value[3] == 1:
+            n_correct_breed += 1
+
+    pct_match = n_match / n_images * 100
+
+    pct_correct_dogs = n_correct_dogs / n_dogs_img * 100
+
+    pct_correct_breed = n_correct_breed / n_dogs_img * 100
+
+    pct_correct_notdogs = n_notdogs_img / n_correct_notdogs * 100
+
+    results_stats_dic["n_images"] = n_images
+    results_stats_dic["n_dogs_img"] = n_dogs_img
+    results_stats_dic["n_notdogs_img"] = n_notdogs_img
+    results_stats_dic["n_match"] = n_match
+    results_stats_dic["n_correct_dogs"] = n_correct_dogs
+    results_stats_dic["n_correct_notdogs"] = n_correct_notdogs
+    results_stats_dic["n_correct_breed"] = n_correct_breed
+
+    results_stats_dic["pct_match"] = pct_match
+    results_stats_dic["pct_correct_dogs"] = pct_correct_dogs
+    results_stats_dic["pct_correct_breed"] = pct_correct_breed
+    results_stats_dic["pct_correct_notdogs"] = pct_correct_notdogs
+
+    return results_stats_dic
+
+
 if __name__ == '__main__':
     in_args = get_input_args()
 
@@ -77,3 +151,5 @@ if __name__ == '__main__':
     classify_images(in_args.directory, results_dic, in_args.arch)
 
     adjust_results4_isadog(results_dic, in_args.dogfile)
+
+    calculates_results_stats(results_dic)
