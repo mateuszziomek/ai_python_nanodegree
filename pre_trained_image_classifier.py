@@ -43,8 +43,7 @@ def classify_images(images_dir, results_dic, model):
         else:
             is_match = 0
 
-        results_dic[filename] = [correct_label, classifier_labels_string, is_match]
-
+        results_dic[filename].extend([classifier_labels_string, is_match])
     return results_dic
 
 
