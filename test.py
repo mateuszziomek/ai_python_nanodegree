@@ -143,6 +143,41 @@ def calculates_results_stats(results_dic):
     return results_stats_dic
 
 
+def print_results(results_dic, results_stats_dic, model, print_incorrect_dogs=False, print_incorrect_breed=False):
+    n_images = results_stats_dic["n_images"]
+    n_correct_dogs = results_stats_dic["n_correct_dogs"]
+    n_correct_notdogs = results_stats_dic["n_correct_notdogs"]
+    n_correct_breed = results_stats_dic["n_correct_breed"]
+
+    print("CNN model architecture used: {}".format(model))
+    print("Number of Images: {}".format(n_images))
+    print("Number of Dog Images: {}".format(results_stats_dic["n_dogs_img"]))
+    print("Number of \"Not-a\" Dog Images: {}".format(results_stats_dic["n_notdogs_img"]))
+
+    for key, value in results_stats_dic.items():
+        if key[0] == 'p':
+            label = key[4:].replace("_", " ").title()
+            print("{}% {}".format(value, label))
+
+    dogs_misclassified = n_correct_dogs + n_correct_notdogs != n_images
+
+    if print_incorrect_dogs and dogs_misclassified:
+        # The labels disagree on whether or not an image is of a "dog"
+        print("Misclassified dogs:\n")
+        for value in results_dic.values():
+            if sum(value[3:]) == 1:
+                print("Pet image label: {}      Classifier labels: {}".format(value[0], value[1]))
+
+    breeds_misclassified = n_correct_dogs != n_correct_breed
+
+    if print_incorrect_breed and breeds_misclassified:
+        # The labels agree that image is of a dog, but disagree on the breed of dog
+        print("\nMisclassified breeds:".upper())
+        for value in results_dic.values():
+            if sum(value[3:]) == 2 and value[2] == 0:
+                print("Pet image label: {}      Classifier labels: {}".format(value[0], value[1]))
+
+
 if __name__ == '__main__':
     in_args = get_input_args()
 
@@ -152,4 +187,6 @@ if __name__ == '__main__':
 
     adjust_results4_isadog(results_dic, in_args.dogfile)
 
-    calculates_results_stats(results_dic)
+    stats = calculates_results_stats(results_dic)
+
+    print_results(results_dic, stats, in_args.arch, True, True)
