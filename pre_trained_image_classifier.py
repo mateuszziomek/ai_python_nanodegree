@@ -34,11 +34,11 @@ def classify_images(images_dir, results_dic, model):
     filenames = listdir(images_dir)
 
     for i, filename in enumerate(filenames):
-        correct_label = results_dic[filename][0]
+        correct_label = results_dic[filename][0].strip()
 
         classifier_labels_string = classifier(images_dir + '/' + filename, model)
 
-        if correct_label in classifier_labels_string.lower():
+        if correct_label in classifier_labels_string.lower().strip():
             is_match = 1
         else:
             is_match = 0
