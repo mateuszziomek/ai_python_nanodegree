@@ -27,7 +27,7 @@ def tag_files(image_dir):
     for file in files:
         # Skip file names starting with '.' character
         if file[0] != '.':
-            tag = [file[0:file.rfind('_')].replace("_", " ").lower()]
+            tag = [file[0:file.rfind('_')].replace("_", " ").lower().strip()]
             results_dic[file] = tag
     return results_dic
 
