@@ -1,6 +1,6 @@
 import argparse
 from os import listdir
-from classifier import classifier
+from project_dogs.classifier import classifier
 
 images_dir = "/Users/mateuszziomek/AI with Python/Projects/AIPND-revision/intropyproject-classify-pet-images/pet_images"
 
