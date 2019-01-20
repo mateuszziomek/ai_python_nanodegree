@@ -6,11 +6,12 @@ import argparse
 import torch
 import numpy as np
 
+from torchvision import transforms, datasets
+
 # Directories
 project_dir = '/Users/mateuszziomek/IdeaProjects/ai_course/project_flowers'
 
 data_dir = project_dir + '/assets/flowers'
-train_dir = data_dir + '/train'
 valid_dir = data_dir + '/valid'
 test_dir = data_dir + '/test'
 
@@ -51,5 +52,36 @@ def get_arguments():
     return args
 
 
+def define_data_loaders(training_dir):
+    train_transforms = transforms.Compose([
+        transforms.RandomRotation(45),
+        transforms.RandomResizedCrop(224),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize(means, devs)
+    ])
+
+    test_transforms = transforms.Compose([
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(means, devs)
+    ])
+
+    train_dataset = datasets.ImageFolder(training_dir, transform=train_transforms)
+
+    test_dataset = datasets.ImageFolder(test_dir, transform=test_transforms)
+
+    valid_dataset = datasets.ImageFolder(valid_dir, transform=test_transforms)
+
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=32, shuffle=True)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=32)
+    valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=32)
+
+
+def train():
+    in_args = get_arguments()
+    define_data_loaders(in_args.data_dir)
+
+
 if __name__ == '__main__':
-    get_arguments()
+    train()
