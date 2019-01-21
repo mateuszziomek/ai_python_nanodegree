@@ -1,2 +1,4 @@
 ## Directory-based project format:
 .idea/
+project_flowers/assets/
+project_flowers/checkpoints/
