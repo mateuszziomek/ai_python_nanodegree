@@ -7,32 +7,8 @@ from torchvision import transforms, datasets, models
 from torch import nn
 from torch import optim
 
-PROJECT_DIR = '/Users/mateuszziomek/IdeaProjects/ai_course/project_flowers'
-
-DATA_DIR = PROJECT_DIR + '/assets/flowers'
-TRAIN_DIR = DATA_DIR + '/train'
-VALID_DIR = DATA_DIR + '/valid'
-TEST_DIR = DATA_DIR + '/test'
-
-TRAIN_LOADER = "train"
-VALID_LOADER = "valid"
-TEST_LOADER = "test"
-
-CHECKPOINT_DIR = PROJECT_DIR + '/checkpoints/checkpoint.pth'
-
-INPUT_SIZE_VGG = 25088
-INPUT_SIZE_ALEXNET = 9216
-OUTPUT_SIZE = 102
-HIDDEN_LAYERS = [500]
-
-DROPOUT = 0.2
-LEARNING_RATE = 0.001
-MOMENTUM = 0.9
-
-EPOCHS = 7
-PRINT_EVERY = 30
-
-MEANS, DEVS = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
+from hyperparameters import *
+from directories import *
 
 
 def get_arguments():
