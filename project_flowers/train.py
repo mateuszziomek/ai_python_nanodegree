@@ -1,14 +1,13 @@
-import sys
 import argparse
 import torch
 import numpy as np
 
-from torchvision import transforms, datasets, models
-from torch import nn
+from torchvision import transforms, datasets
 from torch import optim
 
 from hyperparameters import *
 from directories import *
+from utils import *
 
 
 def get_arguments():
@@ -58,55 +57,6 @@ def get_data_loaders(training_dir):
         TEST_LOADER: test_loader,
         VALID_LOADER: valid_loader
     }
-
-
-def get_classifier(input_size, hidden_sizes, output_size, drop_pct=DROPOUT):
-    # Add first layer
-    classifier = nn.ModuleList([
-        nn.Linear(input_size, hidden_sizes[0]),
-        nn.ReLU(),
-        nn.Dropout(drop_pct)
-    ])
-
-    # Add hidden layers
-    for h1, h2 in zip(hidden_sizes[:-1], hidden_sizes[1:]):
-        classifier.extend([
-            nn.Linear(h1, h2),
-            nn.ReLU(),
-            nn.Dropout(drop_pct)
-        ])
-
-    # Add output layer
-    classifier.extend([
-        nn.Linear(hidden_sizes[-1], output_size),
-        nn.Dropout(drop_pct)
-    ])
-
-    # Add LogSoftmax logits output function
-    classifier.append(nn.LogSoftmax(dim=1))
-
-    return nn.Sequential(*classifier)
-
-
-def create_model(model_name, hidden_sizes, output_size, dropout):
-    # Get the model
-    if model_name == "vgg":
-        model = models.vgg16(pretrained=True)
-        input_size = INPUT_SIZE_VGG
-    elif model_name == "alexnet":
-        model = models.alexnet(pretrained=True)
-        input_size = INPUT_SIZE_ALEXNET
-    else:
-        sys.exit("Unrecognized model architecture")
-
-    # Freeze parameters - do not backpropagate through them
-    for parameter in model.parameters():
-        parameter.requires_grad = False
-
-    # Replace classifier
-    model.classifier = get_classifier(input_size, hidden_sizes, output_size, dropout)
-
-    return model
 
 
 def validate(model, loader, criterion, device):
@@ -184,10 +134,6 @@ def train(model, train_loader, valid_loader, criterion, optimizer, device, epoch
                 validate(model, valid_loader, criterion, device)
 
                 current_loss = 0
-
-
-def get_device(use_gpu):
-    return torch.device("cuda:0" if use_gpu and torch.cuda.is_available() else "cpu")
 
 
 def save_checkpoint(path, model, model_name, optimizer_state, class_to_idx, epochs, output_size, hidden_sizes, dropout):

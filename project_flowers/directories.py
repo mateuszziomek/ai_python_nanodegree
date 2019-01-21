@@ -10,3 +10,5 @@ VALID_LOADER = "valid"
 TEST_LOADER = "test"
 
 CHECKPOINT_DIR = PROJECT_DIR + '/checkpoints/checkpoint.pth'
+
+CATEGORIES = PROJECT_DIR + '/assets/cat_to_name.json'
