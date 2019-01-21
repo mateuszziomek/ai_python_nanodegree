@@ -20,7 +20,8 @@ TEST_LOADER = "test"
 
 CHECKPOINT_DIR = PROJECT_DIR + '/checkpoints/checkpoint.pth'
 
-INPUT_SIZE = 25088
+INPUT_SIZE_VGG = 25088
+INPUT_SIZE_ALEXNET = 9216
 OUTPUT_SIZE = 102
 HIDDEN_LAYERS = [500]
 
@@ -41,7 +42,7 @@ def get_arguments():
 
     # Optional arguments: save checkpoint directory, model architecture, hyper-parameters, gpu mode
     parser.add_argument('--save_dir', nargs=1, default=CHECKPOINT_DIR, help='Model checkpoint directory')
-    parser.add_argument('--arch', nargs=1, default='vgg', help='Model architecture: vgg')
+    parser.add_argument('--arch', default='vgg', type=str, help='Model architecture: vgg, alexnet')
     parser.add_argument('--learning_rate', nargs=1, default=LEARNING_RATE, type=float, help='Learning rate value')
     parser.add_argument('--hidden_units', nargs='+', default=HIDDEN_LAYERS, type=int,
                         help='List of hidden layers\' sizes')
@@ -111,12 +112,16 @@ def get_classifier(input_size, hidden_sizes, output_size, drop_pct=DROPOUT):
     return nn.Sequential(*classifier)
 
 
-def create_model_vgg16(model_name, input_size, hidden_sizes, output_size, dropout):
-    if model_name != "vgg":
-        sys.exit("Unrecognized model architecture")
-
+def create_model(model_name, hidden_sizes, output_size, dropout):
     # Get the model
-    model = models.vgg16(pretrained=True)
+    if model_name == "vgg":
+        model = models.vgg16(pretrained=True)
+        input_size = INPUT_SIZE_VGG
+    elif model_name == "alexnet":
+        model = models.alexnet(pretrained=True)
+        input_size = INPUT_SIZE_ALEXNET
+    else:
+        sys.exit("Unrecognized model architecture")
 
     # Freeze parameters - do not backpropagate through them
     for parameter in model.parameters():
@@ -209,16 +214,16 @@ def get_device(use_gpu):
     return torch.device("cuda:0" if use_gpu and torch.cuda.is_available() else "cpu")
 
 
-def save_checkpoint(path, model, optimizer_state, class_to_idx, epochs, input_size, output_size, hidden_sizes, dropout):
+def save_checkpoint(path, model, model_name, optimizer_state, class_to_idx, epochs, output_size, hidden_sizes, dropout):
     # Save mapping of classes to indices
     model.class_to_idx = class_to_idx
 
     checkpoint = {
+        "arch": model_name,
         "state_dic": model.state_dict(),
         "class_to_idx": class_to_idx,
         "optimizer_state": optimizer_state,
         "epochs": epochs,
-        "input_size": input_size,
         "output_size": output_size,
         "hidden_sizes": hidden_sizes,
         "dropout": dropout
@@ -238,9 +243,8 @@ def main():
     epochs = in_args.epochs
     checkpoint_dir = in_args.save_dir
 
-    model = create_model_vgg16(
+    model = create_model(
         arch,
-        INPUT_SIZE,
         hidden_sizes,
         OUTPUT_SIZE,
         DROPOUT
@@ -259,10 +263,10 @@ def main():
     save_checkpoint(
         checkpoint_dir,
         model,
+        arch,
         optimizer.state,
         data_loaders[TRAIN_LOADER].dataset.class_to_idx,
         epochs,
-        INPUT_SIZE,
         OUTPUT_SIZE,
         hidden_sizes,
         DROPOUT
