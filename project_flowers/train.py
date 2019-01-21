@@ -17,12 +17,12 @@ def get_arguments():
     parser.add_argument('data_dir', action='store', type=str)
 
     # Optional arguments: save checkpoint directory, model architecture, hyper-parameters, gpu mode
-    parser.add_argument('--save_dir', nargs=1, default=CHECKPOINT_DIR, help='Model checkpoint directory')
+    parser.add_argument('--save_dir', default=CHECKPOINT_DIR, help='Model checkpoint directory')
     parser.add_argument('--arch', default='vgg', type=str, help='Model architecture: vgg, alexnet')
-    parser.add_argument('--learning_rate', nargs=1, default=LEARNING_RATE, type=float, help='Learning rate value')
+    parser.add_argument('--learning_rate', default=LEARNING_RATE, type=float, help='Learning rate value')
     parser.add_argument('--hidden_units', nargs='+', default=HIDDEN_LAYERS, type=int,
                         help='List of hidden layers\' sizes')
-    parser.add_argument('--epochs', nargs=1, default=EPOCHS, type=int, help="Number of training epochs")
+    parser.add_argument('--epochs', default=EPOCHS, type=int, help="Number of training epochs")
     parser.add_argument('--gpu', action="store_true", help="Should use GPU enhanced mode")
     args = parser.parse_args()
     return args
