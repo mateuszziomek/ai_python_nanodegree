@@ -37,6 +37,7 @@ def get_data_loaders(training_dir):
     ])
 
     test_transforms = transforms.Compose([
+        transforms.Resize(256),
         transforms.CenterCrop(224),
         transforms.ToTensor(),
         transforms.Normalize(MEANS, DEVS)
