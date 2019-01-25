@@ -1,4 +1,4 @@
-PROJECT_DIR = '/Users/mateuszziomek/IdeaProjects/ai_course/project_flowers'
+PROJECT_DIR = '.'
 
 DATA_DIR = PROJECT_DIR + '/assets/flowers'
 TRAIN_DIR = DATA_DIR + '/train'
