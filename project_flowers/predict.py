@@ -37,7 +37,7 @@ def load_checkpoint(path, device):
     return model
 
 
-def predict(image_path, model, topk, device):
+def predict(image_path, model, topk, cat_to_name, device):
     """
     Predict the class (or classes) of an image using a trained deep learning model.
     """
@@ -54,16 +54,12 @@ def predict(image_path, model, topk, device):
 
         top_probs, top_class_idx = torch.topk(probabilities, topk)
 
-    return top_probs, top_class_idx
-
-
-def get_top_predictions(model, top_probs, top_class_idx, cat_to_name):
-    # Convert keys to values and vice-versa
-    idx_to_class = {v: k for k, v in model.class_to_idx.items()}
-
     # Convert tensors to lists
     top_class_idx = top_class_idx.numpy().tolist()[0]
     top_probs = top_probs.numpy().tolist()[0]
+
+    # Convert keys to values and vice-versa
+    idx_to_class = {v: k for k, v in model.class_to_idx.items()}
 
     # Get topk flower indices
     top_flowers_idx = [idx_to_class[i] for i in top_class_idx]
@@ -93,11 +89,9 @@ if __name__ == '__main__':
     model = load_checkpoint(checkpoint_path, device)
 
     # Get predicted probabilities and class to index map
-    top_probs, top_class_idx = predict(image_path, model, top_k, device)
+    flowers, probs = predict(image_path, model, top_k, cat_to_name, device)
 
     # Print results
-    flowers, probs = get_top_predictions(model, top_probs, top_class_idx, cat_to_name)
-
     print("Top {} prediction(s):".format(top_k))
 
     for i in range(0, len(flowers)):
