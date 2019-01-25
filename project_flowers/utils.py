@@ -40,9 +40,9 @@ def get_classifier(input_size, hidden_sizes, output_size, drop_pct=DROPOUT):
 
 def create_model(model_name, hidden_sizes, output_size, dropout):
     # Get the model
-    if model_name == "vgg":
+    if model_name == "vgg16":
         model = models.vgg16(pretrained=True)
-        input_size = INPUT_SIZE_VGG
+        input_size = INPUT_SIZE_VGG16
     elif model_name == "alexnet":
         model = models.alexnet(pretrained=True)
         input_size = INPUT_SIZE_ALEXNET

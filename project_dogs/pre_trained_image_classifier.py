@@ -8,7 +8,7 @@ images_dir = "/Users/mateuszziomek/AI with Python/Projects/AIPND-revision/introp
 def get_input_args():
     parser = argparse.ArgumentParser(description='Provide input to process.')
     parser.add_argument('--dir', nargs=1, default=images_dir, dest='directory', help='Image Folder')
-    parser.add_argument('--arch', nargs=1, default='vgg', help='CNN Model Architecture')
+    parser.add_argument('--arch', nargs=1, default='vgg16', help='CNN Model Architecture')
     parser.add_argument('--dogfile', nargs=1, default='dognames.txt', help='Text File with Dog Names')
     args = parser.parse_args()
     return args

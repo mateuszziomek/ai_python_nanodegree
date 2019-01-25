@@ -17,7 +17,7 @@ def get_arguments():
 
     # Optional arguments: save checkpoint directory, model architecture, hyper-parameters, gpu mode
     parser.add_argument('--save_dir', default=CHECKPOINT_DIR, help='Model checkpoint directory')
-    parser.add_argument('--arch', default='vgg', type=str, help='Model architecture: vgg, alexnet')
+    parser.add_argument('--arch', default='vgg16', type=str, help='Model architecture: vgg16, alexnet')
     parser.add_argument('--learning_rate', default=LEARNING_RATE, type=float, help='Learning rate value')
     parser.add_argument('--hidden_units', nargs='+', default=HIDDEN_LAYERS, type=int,
                         help='List of hidden layers\' sizes')
